@@ -16,5 +16,16 @@ function part1(measurements) {
 	return counter
 }
 
-function part2(measurements) {}
+function part2(measurements) {
+	let counter = 0
+	for (let i = 0; i < measurements.length; i++) {
+		if (
+			measurements[i] + measurements[i + 1] + measurements[i + 2] <
+			measurements[i + 1] + measurements[i + 2] + measurements[i + 3]
+		) {
+			counter++
+		}
+	}
+	return counter
+}
 console.log(part2(measurements))
