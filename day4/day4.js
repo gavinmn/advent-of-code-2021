@@ -9,25 +9,16 @@ let boards = fullBoards.map((board) =>
 	board.map((row) => row.split(" ").filter((value) => value != ""))
 )
 
-function play(numbers, boards) {
-	for (const number in numbers) {
-		for (const board in boards) {
-			for (const row in boards[board]) {
-				for (const value in boards[board][row]) {
-					let integerValue = parseInt(boards[board][row][value])
-
-					if (integerValue == numbers[number]) {
-						boards[board][row][value] = "x"
-					}
-				}
+function findSum(board) {
+	let sum = 0
+	board.forEach((row) => {
+		row.forEach((value) => {
+			if (value != "x") {
+				sum += parseInt(value)
 			}
-			if (checkWinner(boards[board])) {
-				let boardSum = findSum(boards[board])
-				let score = numbers[number] * boardSum
-				return score
-			}
-		}
-	}
+		})
+	})
+	return sum
 }
 
 function checkWinner(board) {
@@ -49,16 +40,25 @@ function checkWinner(board) {
 	return false
 }
 
-function findSum(board) {
-	let sum = 0
-	board.forEach((row) => {
-		row.forEach((value) => {
-			if (value != "x") {
-				sum += parseInt(value)
+function play(numbers, boards) {
+	for (const number in numbers) {
+		for (const board in boards) {
+			for (const row in boards[board]) {
+				for (const value in boards[board][row]) {
+					let integerValue = parseInt(boards[board][row][value])
+
+					if (integerValue == numbers[number]) {
+						boards[board][row][value] = "x"
+					}
+				}
 			}
-		})
-	})
-	return sum
+			if (checkWinner(boards[board])) {
+				let boardSum = findSum(boards[board])
+				let score = numbers[number] * boardSum
+				return score
+			}
+		}
+	}
 }
 
 console.log(play(numbers, boards))
