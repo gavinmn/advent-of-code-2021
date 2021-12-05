@@ -41,6 +41,7 @@ function checkWinner(board) {
 }
 
 function play(numbers, boards) {
+	let winCount = 0
 	for (const number in numbers) {
 		for (const board in boards) {
 			for (const row in boards[board]) {
@@ -53,9 +54,15 @@ function play(numbers, boards) {
 				}
 			}
 			if (checkWinner(boards[board])) {
-				let boardSum = findSum(boards[board])
-				let score = numbers[number] * boardSum
-				return score
+				console.log(boards[board], numbers[number], boards.length)
+				winCount++
+				if (winCount == boards.length) {
+					let boardSum = findSum(boards[board])
+					let score = numbers[number] * boardSum
+					return score
+				} else {
+					boards[board] = null
+				}
 			}
 		}
 	}
