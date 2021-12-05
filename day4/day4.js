@@ -21,7 +21,6 @@ function play(numbers, boards) {
 					}
 				}
 			}
-			console.log(boards[board])
 			if (checkWinner(boards[board])) {
 				let boardSum = findSum(boards[board])
 				let score = numbers[number] * boardSum
@@ -38,7 +37,8 @@ function checkWinner(board) {
 		for (const x in board[y]) {
 			if (board[y][x] == "x") {
 				horizontalCount++
-			} else if (board[x][y] == "x") {
+			}
+			if (board[x][y] == "x") {
 				verticalCount++
 			}
 		}
